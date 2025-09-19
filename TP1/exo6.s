@@ -10,17 +10,25 @@ adda one
 sti
 
 ld n
-sub three
+brz end
+sub one
+brz end
+sub one
+brz end
 st n
+st zero
 
 loop:
 lda adr
-ld zero
-add two
-add three
-sti
-
+ldi
 adda one
+addx
+adda one
+addx
+adda one
+sti
+suba two
+
 sta adr
 
 ld n
@@ -28,11 +36,15 @@ sub one
 st n
 
 brnz loop
+
+end:
+ld adr
+sub zero
 stop
 
 .data
 n: 4
-adr: 29 # <- À modifier
+adr: 39 # <- Ã€ modifier
 zero: 0
 one: 1
 two: 2
