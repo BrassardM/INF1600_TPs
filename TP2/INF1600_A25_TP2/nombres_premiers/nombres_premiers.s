@@ -18,7 +18,40 @@ push    %ebp
 mov     %esp,%ebp
 
 # Votre code ici (cette ligne peut etre enlevee)
+primeinit:
+movl n, %eax
+andl $1, %eax
+cmpl $0, %eax
+je printnot
+movl $3, %ecx
 
+primeloop:
+movl $0,%edx
+movl n,%eax
+divl %ecx
+cmp $0, %edx
+je printnot
+addl $2, %ecx
+movl %ecx, %eax
+mull %ecx
+cmp n, %eax
+jge printprime
+jmp primeloop
+
+
+printprime:
+pushl $1
+pushl $format_single_number
+call printf
+jmp end
+
+printnot:
+pushl $0
+pushl $format_single_number
+call printf
+
+
+end:
 # epilogue (cours 5)        # (ne pas modifier les 3 prochaines lignes)
 movl $0, %eax               # valeur de retour (0 = OK)
 leave
