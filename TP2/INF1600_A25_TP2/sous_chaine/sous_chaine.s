@@ -7,7 +7,7 @@ s:
 .asciz "bleu"
 
 format_sentence:
-.asciz "Vous pouvez modifier la phrase et le nombre de variables: %d\n"
+.asciz "1 si la sous chaine est contenue, -1 sinon: %d\n"
 
 .text
 .globl main
@@ -18,7 +18,44 @@ push    %ebp
 mov     %esp,%ebp
 
 # Votre code ici (cette ligne peut etre enlevee)
+findinit:
+movl $phrase,%esi
+movl $s,%edi
+movb (%edi),%bl  
 
+findloop:
+movb (%esi), %al            # if the null terminator
+cmpb $0, %al
+je printnot
+cmp %al, %bl
+jne resetss
+
+nextssletter:
+addl $1, %edi
+movb (%edi), %bl
+cmpb $0, %bl
+je printin                  # only happends when the whole substring is read in the string
+jmp nextiterprep
+
+resetss:
+movl $s,%edi
+movb (%edi),%bl
+
+nextiterprep:  
+addl $1, %esi
+jmp findloop
+
+printin:
+pushl $1
+pushl $format_sentence
+call printf
+jmp end
+
+printnot:
+pushl $-1
+pushl $format_sentence
+call printf
+end:
 # epilogue (cours 5)        # (ne pas modifier les 3 prochaines lignes)
 movl $0, %eax               # valeur de retour (0 = OK)
 leave

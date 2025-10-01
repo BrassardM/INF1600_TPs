@@ -10,7 +10,7 @@ format_single_number:
 .asciz "%d\n"
 
 format_sentence:
-.asciz "Vous pouvez modifier la phrase et le nombre de variables: %d\n"
+.asciz "Le nombre atypique est : %d\n"
 
 .text
 .globl main
@@ -56,7 +56,7 @@ loop findloop
 
 print:
 pushl (%edx)
-pushl $format_single_number
+pushl $format_sentence
 call printf
 
 # epilogue (cours 5)        # (ne pas modifier les 3 prochaines lignes)

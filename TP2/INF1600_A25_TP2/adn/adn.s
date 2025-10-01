@@ -4,7 +4,7 @@ dna:
 .asciz "ATTGC"
 
 format_sentence:
-.asciz "Vous pouvez modifier la phrase et le nombre de variables: %d\n"
+.asciz "Phrase DNA Inverse: %s\n"
 
 .text
 .globl main
@@ -54,6 +54,7 @@ jmp charloop
 
 printseq:
 pushl $dna
+pushl $format_sentence
 call printf
 end:
 

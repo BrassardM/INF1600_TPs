@@ -7,7 +7,7 @@ format_single_number:
 .asciz "%d\n"
 
 format_sentence:
-.asciz "Vous pouvez modifier la phrase et le nombre de variables: %d\n"
+.asciz "1 si c'est un nombre premier, 0 sinon : %d\n"
 
 .text
 .globl main
@@ -41,13 +41,13 @@ jmp primeloop
 
 printprime:
 pushl $1
-pushl $format_single_number
+pushl $format_sentence
 call printf
 jmp end
 
 printnot:
 pushl $0
-pushl $format_single_number
+pushl $format_sentence
 call printf
 
 
