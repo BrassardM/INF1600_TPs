@@ -7,7 +7,7 @@ s:
 .asciz "bleu"
 
 format_sentence:
-.asciz "1 si la sous chaine est contenue, -1 sinon: %d\n"
+.asciz "index de la sous chaine: %d\n"
 
 .text
 .globl main
@@ -39,6 +39,8 @@ jmp nextiterprep
 
 resetss:
 movl $s,%edi
+movl %esi, %edx
+subl $phrase, %edx
 movb (%edi),%bl
 
 nextiterprep:  
@@ -46,7 +48,7 @@ addl $1, %esi
 jmp findloop
 
 printin:
-pushl $1
+pushl %edx
 pushl $format_sentence
 call printf
 jmp end
