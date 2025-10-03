@@ -40,7 +40,6 @@ jmp nextiterprep
 resetss:
 movl $s,%edi
 movl %esi, %edx
-subl $phrase, %edx
 movb (%edi),%bl
 
 nextiterprep:  
@@ -48,6 +47,7 @@ addl $1, %esi
 jmp findloop
 
 printin:
+subl $phrase, %edx
 pushl %edx
 pushl $format_sentence
 call printf
